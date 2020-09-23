@@ -1,0 +1,43 @@
+{
+  "name": "znaiderest-widget",
+  "version": "0.1.1",
+  "description": "Znaiderest widget for distributing znaiderest booking form on clients pages",
+  "private": true,
+  "engines": {
+    "npm": ">=6",
+    "node": ">=10"
+  },
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "npm run build:clean && parcel build src/index.html src/test-page/index.html --no-content-hash --no-source-maps --public-url . && npm run build:rename",
+    "build:rename": "cd ./dist && cp *.js znaiderest-widget.js",
+    "build:clean": "rm -rf ./dist ./.cache && rm -rf release release-latest release-major",
+    "start": "parcel src/index.html",
+    "watch": "parcel watch src/index.html",
+    "lint": "eslint ./src",
+    "release": "npm run release:update-branches && git push --tags origin master",
+    "release:update-branches": "git checkout development && git pull origin development && npm version minor && git checkout master && git pull origin master && git merge development",
+    "create-release": "npm run build && prepare-release --version $npm_package_version --input ./dist --output ./release --ignore-dot-files --latest ./release-latest && prepare-release --version $npm_package_version --input ./dist --output ./release-major --ignore-dot-files --deploy-major",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "Anton Boyko",
+    "email": "anton.diablero@gmail.com",
+    "url": "https://github.com/diablero13"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@octokit/rest": "^16.35.0",
+    "eslint": "^6.7.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.1",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-css-to-string": "^2.5.0",
+    "prepare-release": "^1.2.0",
+    "prettier": "1.19.1"
+  },
+  "dependencies": {}
+}

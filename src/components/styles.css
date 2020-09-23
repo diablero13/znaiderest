@@ -1,0 +1,115 @@
+/* @import url('https://fonts.googleapis.com/css2/?family=Montserrat:wght@100;400;600;700&display=swap'); */
+
+/* Main styles*/
+
+#znaiderest-widget * {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+#znaiderest-widget {
+  position: relative;
+  display: block;
+  width: 300px;
+  height: 250px;
+  box-sizing: border-box;
+  color: #fff100;
+  background: #2a0632;
+  font-family: 'Montserrat';
+  font-size: 14px;
+  font-weight: 400;
+}
+
+#znaiderest-booking-form {
+  position: relative;
+  width: 300px;
+  height: 169px;
+  overflow: hidden;
+}
+
+#znaiderest-booking-overlay {
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.loading #znaiderest-booking-overlay svg,
+.processing #znaiderest-booking-overlay svg {
+  display: block;
+}
+
+.initial #znaiderest-booking-overlay {
+  display: none;
+}
+
+/* Overlay spinner animation */
+
+#znaiderest-booking-overlay svg {
+  display: none;
+  width: 50px;
+  height: 50px;
+  font-size: 0;
+  color: #fff100;
+  animation: loading-spinner-rotate 2s linear infinite;
+  transform-origin: center center;
+  z-index: inherit;
+}
+
+#znaiderest-booking-overlay svg circle {
+  stroke-dasharray: 89, 200;
+  stroke-dashoffset: -35px;
+  stroke-linecap: round;
+  animation: loading-spinner-dash 1.5s ease-in-out infinite;
+}
+
+@-webkit-keyframes loading-spinner-rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes loading-spinner-rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes loading-spinner-dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
+@keyframes loading-spinner-dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
