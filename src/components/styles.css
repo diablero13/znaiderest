@@ -1,4 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2/?family=Montserrat:wght@100;400;600;700&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;600;700&display=swap'); */
 
 /* Main styles*/
 
@@ -11,25 +11,34 @@
 #znaiderest-widget {
   position: relative;
   display: block;
-  width: 300px;
-  height: 250px;
+  width: 480px;
+  height: 170px;
   box-sizing: border-box;
   color: #fff100;
   background: #2a0632;
-  font-family: 'Montserrat';
+  font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   font-weight: 400;
 }
 
+html,
+body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
 #znaiderest-booking-form {
+  width: 480px;
+  padding: 10px;
+  height: 100%;
   position: relative;
-  width: 300px;
-  height: 169px;
   overflow: hidden;
 }
 
 #znaiderest-booking-overlay {
-  display: flex;
+  display: none;
   position: absolute;
   left: 0;
   top: 0;
@@ -37,26 +46,153 @@
   height: 100%;
   justify-content: center;
   align-items: center;
-  background: transparent;
+  background: #2a0632;
+  z-index: 99;
 }
 
-.hidden {
-  visibility: hidden;
-}
-
-.loading #znaiderest-booking-overlay svg,
-.processing #znaiderest-booking-overlay svg {
-  display: block;
-}
-
-.initial #znaiderest-booking-overlay {
+#znaiderest-booking-overlay .overlay {
   display: none;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
 }
 
+#znaiderest-widget.loading #znaiderest-booking-overlay,
+#znaiderest-widget.processing #znaiderest-booking-overlay,
+#znaiderest-widget.success #znaiderest-booking-overlay,
+#znaiderest-widget.error #znaiderest-booking-overlay {
+  display: flex;
+}
+
+#znaiderest-widget.loading .overlay.loading,
+#znaiderest-widget.processing .overlay.processing,
+#znaiderest-widget.success .overlay.success,
+#znaiderest-widget.error .overlay.error {
+  display: flex;
+}
+
+/* From styles */
+
+#znaiderest-booking-form .title {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+#znaiderest-booking-form .form-box {
+  display: grid;
+  box-sizing: border-box;
+  grid-gap: 10px 10px;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    'name  phone'
+    'date number'
+    'submit submit';
+}
+
+#znaiderest-booking-form .form-box .form-field {
+  position: relative;
+}
+
+#znaiderest-booking-form .form-box .name {
+  grid-area: name;
+}
+#znaiderest-booking-form .form-box .phone {
+  grid-area: phone;
+}
+#znaiderest-booking-form .form-box .date {
+  grid-area: date;
+}
+#znaiderest-booking-form .form-box .number {
+  grid-area: number;
+}
+#znaiderest-booking-form .form-box .submit {
+  grid-area: submit;
+}
+
+#znaiderest-booking-form .form-box .form-field input {
+  width: 100%;
+  height: 30px;
+  padding: 0 10px;
+  font-size: 14px;
+  background-color: #fff100;
+  color: #2a0632;
+  border: none;
+  outline: none;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 30px;
+}
+
+#znaiderest-booking-form.inline-inputs .form-box .form-field input {
+  background: transparent;
+  color: #fff100;
+  border-bottom: 1px solid #fff100;
+}
+
+#znaiderest-booking-form.validated .form-box .form-field input {
+  border-left: 5px solid #fff100;
+  padding-left: 5px;
+}
+
+/* #znaiderest-booking-form.validated .form-box .form-field input:valid {
+  border-color: #356639f8;
+} */
+#znaiderest-booking-form.validated .form-box .form-field input:invalid {
+  border-color: #ec2626;
+}
+
+/* Custom number controller */
+/* #znaiderest-booking-form .form-box .form-field input[type='number']::-webkit-inner-spin-button,
+#znaiderest-booking-form .form-box .form-field input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+#znaiderest-booking-form .form-box .form-field input[type='number'] {
+  -moz-appearance: textfield;
+} */
+
+#znaiderest-booking-form .form-box .form-field button {
+  display: inline-block;
+  width: 100%;
+  height: 30px;
+  outline: none;
+  border: none;
+  padding: 5px;
+  background: #fff100;
+  color: #2a0632;
+  transition: all 0.4s ease;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+#znaiderest-booking-form .form-box .form-field label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff100;
+  pointer-events: none;
+  transition: 0.5s;
+}
+#znaiderest-booking-form .form-box .form-field input:focus ~ label,
+#znaiderest-booking-form .form-box .form-field input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #03e9f4;
+  font-size: 12px;
+}
 /* Overlay spinner animation */
 
-#znaiderest-booking-overlay svg {
-  display: none;
+#znaiderest-booking-overlay .preloader-box {
+  margin-top: 20px;
+}
+
+#znaiderest-booking-overlay .preloader-box svg {
+  display: block;
   width: 50px;
   height: 50px;
   font-size: 0;
@@ -66,7 +202,7 @@
   z-index: inherit;
 }
 
-#znaiderest-booking-overlay svg circle {
+#znaiderest-booking-overlay .preloader-box svg circle {
   stroke-dasharray: 89, 200;
   stroke-dashoffset: -35px;
   stroke-linecap: round;
@@ -112,4 +248,8 @@
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -124px;
   }
+}
+
+.hidden {
+  visibility: hidden;
 }
