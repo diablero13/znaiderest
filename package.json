@@ -2,6 +2,10 @@
   "name": "znaiderest-widget",
   "version": "0.1.1",
   "description": "Znaiderest widget for distributing znaiderest booking form on clients pages",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/diablero13/znaiderest.git"
+  },
   "private": true,
   "engines": {
     "npm": ">=6",
