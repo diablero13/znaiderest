@@ -83,11 +83,11 @@ body {
   box-sizing: border-box;
   grid-gap: 10px 10px;
   grid-template-rows: 1fr 1fr 1fr;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas:
-    'name  phone'
-    'date number'
-    'submit submit';
+    'name name name phone phone phone'
+    'date date time time number number'
+    'submit submit submit submit submit submit';
 }
 
 #znaiderest-booking-form .form-box .form-field {
@@ -102,6 +102,9 @@ body {
 }
 #znaiderest-booking-form .form-box .date {
   grid-area: date;
+}
+#znaiderest-booking-form .form-box .time {
+  grid-area: time;
 }
 #znaiderest-booking-form .form-box .number {
   grid-area: number;

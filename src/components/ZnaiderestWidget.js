@@ -8,8 +8,7 @@ const RECAPTCHA_SCRIPT_URL = `https://www.google.com/recaptcha/api.js?render=${R
 const FONT_STYLES_URL =
   'https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;600;700&display=swap';
 
-const SHOULD_DISPLAY_PRELOADER_OVERLAY = true;
-
+const BOOKING_TITLE_TEXT = `Забронировать столик в ресторане`;
 const BOOKING_LOADING_TEXT = `Znaiderest инициализируется...`;
 const BOOKING_PROCESSING_TEXT = `Ваш запрос резервирования в процессе обработки...`;
 const BOOKING_SUCCESS_TEXT = `Поздравляем ваше резервирование подтверждено!`;
@@ -84,7 +83,7 @@ export default class ZnaiderestWidget extends window.HTMLElement {
       <input placeholder="Количество персон" type="number" name="number" min="1" max="100" step="1" value="1" required />
     </div>
     <div class="form-field date">
-      <input autocomplete="off" type="datetime-local" name="date" required />
+      <input autocomplete="off" type="date" name="date" required />
     </div>
     <div class="form-field time">
       <input autocomplete="off" type="time" name="time" required />
@@ -101,9 +100,9 @@ export default class ZnaiderestWidget extends window.HTMLElement {
 
   fillBookingForm() {
     const titleElement = this.bookingForm.querySelector('.title');
-    const dateField = this.bookingForm.querySelector('.form-box input[type="datetime-local"]');
+    const dateField = this.bookingForm.querySelector('.form-box input[type="date"]');
 
-    const titleText = `Забронировать столик в ресторане %${this.config.clientId}%`;
+    const titleText = `${BOOKING_TITLE_TEXT} Some Restoraunt`;
     const currentDate = new Date().toISOString().slice(0, -8);
 
     titleElement.textContent = titleText;
@@ -117,8 +116,7 @@ export default class ZnaiderestWidget extends window.HTMLElement {
 
     overlay.id = 'znaiderest-booking-overlay';
 
-    if (SHOULD_DISPLAY_PRELOADER_OVERLAY) {
-      overlay.innerHTML = `
+    overlay.innerHTML = `
 <div class="loading overlay">
   ${BOOKING_LOADING_TEXT}
   <div class="preloader-box">
@@ -153,7 +151,6 @@ export default class ZnaiderestWidget extends window.HTMLElement {
 <div class="error overlay">
   ${BOOKING_ERROR_TEXT}
 </div>`;
-    }
 
     this.root.appendChild(overlay);
     return overlay;
@@ -180,7 +177,6 @@ export default class ZnaiderestWidget extends window.HTMLElement {
       window.grecaptcha
         .execute(RECAPTCHA_KEY, { action: 'submit' })
         .then(token => {
-          console.log('ReCaptcha:', { token }); // eslint-disable-line
           callback(token);
         })
         .catch(this.onBookingError);
