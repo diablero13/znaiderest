@@ -2,10 +2,6 @@
 
 **Znaiderest** widget for distributing Znaiderest booking form on clients pages
 
-## Testing
-
-Test page: <https://embed.znaiderest.com/widget/index.html>
-
 ## Development
 
 - `npm start` runs dev server and watcher
