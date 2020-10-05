@@ -4,19 +4,57 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Znaiderest widgets test page</title>
-    <style>
-      #znaiderest-widget-frame {
-        width: 300px;
-        height: 250px;
-        margin: 20px;
-      }
-    </style>
+    <title>Znaiderest widget test page</title>
+    <script src="./component.js" defer></script>
   </head>
 
   <body>
-    <div id="znaiderest-widget-frame">
-      <iframe width="300" height="250" src="../index.html" frameborder="0"></iframe>
-    </div>
+    <iframe
+      width="700"
+      height="340"
+      src="index.html"
+      data-client-id="c3ff1898-493d-449c-9f93-05aad8949c19"
+      data-options='[
+        {"value": "столик на террасе", "title": "Летняя площадка"},
+        {"value": "напомнить о резерве за час", "title": "Напомнить о бронировании", "checked": true},
+        {"value": "Бизнес ланч"},
+        "игровая комната",
+        {"value": "парковка", "title": "Парковочное место"},
+        {"value": "напомнить о резерве за час", "title": "Напомнить о бронировании", "checked": true},
+        {"value": "столик на террасе", "title": "Летняя площадка"}
+      ]'
+    ></iframe>
+
+    <br />
+
+    <znaiderest-widget
+      clientId="c3ff1898-493d-449c-9f93-05aad8949c19"
+      options='[{"value": "напомнить о резерве за час", "title": "Напомнить о бронировании", "checked": true},"Летняя площадка"]'
+      custom='{
+        "color": "#e0e0e0",
+        "background": "#333",
+        "hideFooter": true
+      }'
+      locale="uk"
+      width="500"
+    >
+    </znaiderest-widget>
+
+    <br />
+
+    <znaiderest-widget
+      clientId="c3ff1898-493d-449c-9f93-05aad8949c19"
+      options="Один;Два;Три;"
+      width="380"
+    ></znaiderest-widget>
+
+    <br />
+
+    <!-- <iframe
+      width="400"
+      height="300"
+      frameborder="0"
+      src="index.html?clientId=c3ff1898-493d-449c-9f93-05aad8949c19&options=Один;Два;Три;Еще опция;Два раза;Три;"
+    ></iframe> -->
   </body>
 </html>

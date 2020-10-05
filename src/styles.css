@@ -1,6 +1,17 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;600;700&display=swap'); */
-
 /* Main styles*/
+html,
+body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
+}
 
 #znaiderest-widget * {
   padding: 0;
@@ -11,32 +22,25 @@
 #znaiderest-widget {
   position: relative;
   display: block;
-  width: 480px;
-  height: 170px;
+  /* width: 480px; */
+  /* height: 248px; */
+  padding-bottom: 84px;
   box-sizing: border-box;
-  color: #fff100;
-  background: #2a0632;
+  color: var(--custom-text-color, #fff100);
+  background: var(--custom-background-color, #2a0632);
   font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   font-weight: 400;
 }
 
-html,
-body {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-}
-
 #znaiderest-booking-form {
-  width: 480px;
+  /* width: 480px; */
+  width: 100%;
   padding: 10px;
   height: 100%;
   position: relative;
   overflow: hidden;
 }
-
 #znaiderest-booking-overlay {
   display: none;
   position: absolute;
@@ -44,9 +48,10 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
+  padding: 10px;
   justify-content: center;
   align-items: center;
-  background: #2a0632;
+  background: var(--custom-background-color, #2a0632);
   z-index: 99;
 }
 
@@ -57,18 +62,37 @@ body {
   align-items: center;
 }
 
-#znaiderest-widget.loading #znaiderest-booking-overlay,
-#znaiderest-widget.processing #znaiderest-booking-overlay,
-#znaiderest-widget.success #znaiderest-booking-overlay,
-#znaiderest-widget.error #znaiderest-booking-overlay {
+#znaiderest-widget.overlay #znaiderest-booking-overlay {
   display: flex;
 }
 
 #znaiderest-widget.loading .overlay.loading,
 #znaiderest-widget.processing .overlay.processing,
 #znaiderest-widget.success .overlay.success,
+#znaiderest-widget.booking-error .overlay.booking-error,
+#znaiderest-widget.init-error .overlay.init-error,
 #znaiderest-widget.error .overlay.error {
   display: flex;
+}
+
+#znaiderest-logo {
+  position: absolute;
+  bottom: 46px;
+  width: 100%;
+  height: 24px;
+  text-align: center;
+  mix-blend-mode: lighten;
+}
+
+#znaiderest-logo span {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+}
+
+#znaiderest-logo img {
+  height: 100%;
+  /* width: 100%; */
 }
 
 /* From styles */
@@ -82,11 +106,12 @@ body {
   display: grid;
   box-sizing: border-box;
   grid-gap: 10px 10px;
-  grid-template-rows: 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas:
     'name name name phone phone phone'
     'date date time time number number'
+    'options options options options options options'
+    'notes notes notes notes notes notes'
     'submit submit submit submit submit submit';
 }
 
@@ -109,38 +134,72 @@ body {
 #znaiderest-booking-form .form-box .number {
   grid-area: number;
 }
+#znaiderest-booking-form .form-box .options {
+  grid-area: options;
+}
+#znaiderest-booking-form .form-box .notes {
+  grid-area: notes;
+}
 #znaiderest-booking-form .form-box .submit {
   grid-area: submit;
 }
 
-#znaiderest-booking-form .form-box .form-field input {
+#znaiderest-booking-form .form-box .checkbox-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#znaiderest-booking-form .form-box .form-field > input,
+#znaiderest-booking-form .form-box .form-field > textarea,
+#znaiderest-booking-form .form-box .form-field > select {
   width: 100%;
   height: 30px;
   padding: 0 10px;
   font-size: 14px;
-  background-color: #fff100;
-  color: #2a0632;
+  background-color: var(--custom-text-color, #fff100);
+  color: var(--custom-background-color, #2a0632);
   border: none;
   outline: none;
   font-family: 'Montserrat', sans-serif;
   line-height: 30px;
 }
 
-#znaiderest-booking-form.inline-inputs .form-box .form-field input {
-  background: transparent;
-  color: #fff100;
-  border-bottom: 1px solid #fff100;
+#znaiderest-booking-form .form-box .form-field > textarea {
+  height: auto;
+  resize: none;
 }
 
-#znaiderest-booking-form.validated .form-box .form-field input {
-  border-left: 5px solid #fff100;
+#znaiderest-booking-form .form-box .form-field .checkbox-box > .checkbox {
+  margin-right: 10px;
+  margin-bottom: 5px;
+  min-width: 148px;
+}
+
+#znaiderest-booking-form .form-box .form-field .checkbox-box > .checkbox label {
+  text-transform: initial;
+}
+
+#znaiderest-booking-form.inline-inputs .form-box .form-field > input,
+#znaiderest-booking-form.inline-inputs .form-box .form-field > select,
+#znaiderest-booking-form.inline-inputs .form-box .form-field > textarea {
+  background: var(--custom-background-color, #2a0632);
+  color: var(--custom-text-color, #fff100);
+  border-bottom: 1px solid var(--custom-text-color, #fff100);
+}
+
+#znaiderest-booking-form.validated .form-box .form-field > input,
+#znaiderest-booking-form.validated .form-box .form-field > textarea,
+#znaiderest-booking-form.validated .form-box .form-field > select {
+  border-left: 5px solid var(--custom-text-color, #fff100);
   padding-left: 5px;
 }
 
 /* #znaiderest-booking-form.validated .form-box .form-field input:valid {
   border-color: #356639f8;
 } */
-#znaiderest-booking-form.validated .form-box .form-field input:invalid {
+#znaiderest-booking-form.validated .form-box .form-field > input:invalid,
+#znaiderest-booking-form.validated .form-box .form-field > textarea:invalid,
+#znaiderest-booking-form.validated .form-box .form-field > select:invalid {
   border-color: #ec2626;
 }
 
@@ -164,30 +223,45 @@ body {
   outline: none;
   border: none;
   padding: 5px;
-  background: #fff100;
-  color: #2a0632;
+  background: var(--custom-text-color, #fff100);
+  color: var(--custom-background-color, #2a0632);
   transition: all 0.4s ease;
   font-size: 14px;
   font-weight: 700;
 }
 
-#znaiderest-booking-form .form-box .form-field label {
-  position: absolute;
+#znaiderest-booking-form .form-box .form-field > label {
+  /* position: absolute;
   top: 0;
   left: 0;
-  padding: 10px 0;
-  font-size: 16px;
-  color: #fff100;
-  pointer-events: none;
-  transition: 0.5s;
+  font-size: 16px; */
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: var(--custom-text-color, #fff100);
+  text-transform: capitalize;
+  /* pointer-events: none;
+  transition: 0.5s; */
 }
-#znaiderest-booking-form .form-box .form-field input:focus ~ label,
-#znaiderest-booking-form .form-box .form-field input:valid ~ label {
+#znaiderest-booking-form .form-box .form-field > input:focus ~ label,
+#znaiderest-booking-form .form-box .form-field > textarea:focus ~ label,
+#znaiderest-booking-form .form-box .form-field > select:focus ~ label,
+#znaiderest-booking-form .form-box .form-field > input:valid ~ label,
+#znaiderest-booking-form .form-box .form-field > textarea:valid ~ label,
+#znaiderest-booking-form .form-box .form-field > select:valid ~ label {
   top: -20px;
   left: 0;
   color: #03e9f4;
   font-size: 12px;
 }
+
+/* ReCaptcha badge */
+
+.grecaptcha-badge {
+  /* position: absolute !important;
+  bottom: auto !important; */
+}
+
 /* Overlay spinner animation */
 
 #znaiderest-booking-overlay .preloader-box {
@@ -199,7 +273,7 @@ body {
   width: 50px;
   height: 50px;
   font-size: 0;
-  color: #fff100;
+  color: var(--custom-text-color, #fff100);
   animation: loading-spinner-rotate 2s linear infinite;
   transform-origin: center center;
   z-index: inherit;
@@ -211,6 +285,8 @@ body {
   stroke-linecap: round;
   animation: loading-spinner-dash 1.5s ease-in-out infinite;
 }
+
+/* Animations keyframes */
 
 @-webkit-keyframes loading-spinner-rotate {
   100% {
@@ -251,8 +327,4 @@ body {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -124px;
   }
-}
-
-.hidden {
-  visibility: hidden;
 }
