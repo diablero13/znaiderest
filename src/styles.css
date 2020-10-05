@@ -77,17 +77,11 @@ body {
 
 #znaiderest-logo {
   position: absolute;
-  bottom: 46px;
+  bottom: 36px;
   width: 100%;
   height: 24px;
   text-align: center;
   mix-blend-mode: lighten;
-}
-
-#znaiderest-logo span {
-  display: inline-block;
-  height: 100%;
-  width: 100%;
 }
 
 #znaiderest-logo img {

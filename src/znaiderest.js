@@ -1,4 +1,4 @@
-import { getUrlParams, parseData, convertTime, convertDay, getLocaleText } from './utils';
+import { convertTime, convertDay, getLocaleText } from './utils';
 import { RECAPTCHA_KEY, API_BASE_URI, LOCALIZATION } from './constants';
 
 import styles from './styles.css';
@@ -311,26 +311,3 @@ export default class Znaiderest {
     });
   }
 }
-
-window.frameElement.style = 'display: block; border: none;';
-
-function onDomLoaded() {
-  const { clientId, custom, options, origin, locale } = {
-    ...getUrlParams(),
-    ...(window.frameElement ? window.frameElement.dataset : {})
-  };
-
-  const params = {
-    custom: parseData(custom),
-    options: parseData(options),
-    origin,
-    locale,
-    clientId
-  };
-
-  const znaiderest = new Znaiderest(params);
-
-  znaiderest.init();
-}
-
-document.addEventListener('DOMContentLoaded', onDomLoaded);
