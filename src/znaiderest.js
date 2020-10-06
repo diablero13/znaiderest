@@ -3,7 +3,7 @@ import { RECAPTCHA_KEY, API_BASE_URI, LOCALIZATION } from './constants';
 
 import styles from './styles.css';
 
-const IS_DEVELOPMENT = window.location.host.split(':')[0] === 'localhost';
+const IS_DEVELOPMENT = true;
 
 export default class Znaiderest {
   constructor({ clientId, options, custom, origin, locale }) {
@@ -63,7 +63,7 @@ export default class Znaiderest {
   applyLocalization() {
     const localizableElements = [...this.root.querySelectorAll('[data-text-key]')];
 
-    localizableElements.forEach(element => {
+    localizableElements.forEach((element) => {
       const key = element.dataset.textKey;
       const localText = getLocaleText(key, this.config.locale, LOCALIZATION);
       element.textContent = localText;
@@ -72,7 +72,7 @@ export default class Znaiderest {
 
   getClientData() {
     const { clientId } = this.config;
-    this.reCaptchaWrapper(token => {
+    this.reCaptchaWrapper((token) => {
       fetch(`${API_BASE_URI}/places/${clientId}`, {
         method: 'GET',
         mode: 'cors',
@@ -83,7 +83,7 @@ export default class Znaiderest {
             }
           : {}
       })
-        .then(res => res.json())
+        .then((res) => res.json())
         .then(this.onClientDataLoaded)
         .catch(this.onInitError);
     }, 'initial');
@@ -132,7 +132,7 @@ export default class Znaiderest {
       .map((option, i) => {
         if (!option) return '';
         const value = option.value || option;
-        const title = (s => s.splice(0, 1, s[0].toUpperCase()) && s.join(''))([
+        const title = ((s) => s.splice(0, 1, s[0].toUpperCase()) && s.join(''))([
           ...(option.title || value).trim()
         ]);
         return `
@@ -216,7 +216,7 @@ export default class Znaiderest {
     this.switchContext('BOOKING_PROCESSING');
 
     const { clientId } = this.config;
-    this.reCaptchaWrapper(token => {
+    this.reCaptchaWrapper((token) => {
       return fetch(`${API_BASE_URI}/places/${clientId}/reservations`, {
         body: JSON.stringify(data),
         method: 'POST',
@@ -228,7 +228,7 @@ export default class Znaiderest {
             }
           : {}
       })
-        .then(res => {
+        .then((res) => {
           if (!res.ok) {
             this.onBookingError();
           } else {
@@ -303,7 +303,7 @@ export default class Znaiderest {
     window.grecaptcha.ready(() => {
       window.grecaptcha
         .execute(RECAPTCHA_KEY, { action })
-        .then(token => {
+        .then((token) => {
           // console.log('RECAPTCHA', { token }); // eslint-disable-line
           callback(token);
         })
