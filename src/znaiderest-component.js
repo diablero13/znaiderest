@@ -12,14 +12,15 @@ class ZnaiderestWidget extends window.HTMLElement {
 
     this.style = `display: block;`;
 
-    this.style.width = this.config.width ? this.config.width + 'px' : null;
-    this.style.height = this.config.height ? this.config.height + 'px' : null;
+    this.style.width = this.config.width ? `${this.config.width}px` : null;
+    this.style.height = this.config.height ? `${this.config.height}px` : null;
   }
 
   connectedCallback() {
     const scriptSrc = [...document.scripts]
       .map(({ src }) => new URL(src))
       .find((src) => src.href.indexOf('znaiderest-component') !== -1);
+
     const shadow = this.attachShadow({ mode: 'closed' });
     const frame = document.createElement('iframe');
     const src = new URL(`${scriptSrc.href.split('/').slice(0, -1).join('/')}/index.html`);
