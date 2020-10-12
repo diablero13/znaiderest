@@ -1,12 +1,13 @@
 import { convertTime, convertDay, getLocaleText } from './utils';
 import { RECAPTCHA_KEY, API_BASE_URI, LOCALIZATION } from './constants';
-import styles from './styles.css';
+// import styles from './styles.css';
 
 export default class Znaiderest {
   constructor({ clientId, options, custom, origin, locale, development: isDevelopment }) {
     this.config = { clientId, options, origin, locale, custom, isDevelopment };
     this.client = { clientId, origin };
 
+    this.body = document.body;
     this.root = document.getElementById('znaiderest-widget');
     this.bookingOverlay = document.getElementById('znaiderest-booking-overlay');
     this.bookingForm = document.getElementById('znaiderest-booking-form');
@@ -33,8 +34,8 @@ export default class Znaiderest {
       `;
     }
 
-    this.root.style.display = 'block';
-    styleElement.append(document.createTextNode(customStyles + styles));
+    // styleElement.append(document.createTextNode(customStyles + styles));
+    styleElement.append(document.createTextNode(customStyles));
     document.body.appendChild(styleElement);
   }
 
@@ -256,6 +257,7 @@ export default class Znaiderest {
     switch (type) {
       case 'BOOKING_INITIAL':
         this.root.className = 'initial';
+        this.body.className = '';
         break;
       case 'BOOKING_PROCESSING':
         this.root.className = 'overlay processing';
@@ -265,15 +267,18 @@ export default class Znaiderest {
         break;
       case 'BOOKING_LOADING':
         this.root.className = 'overlay loading';
+        this.body.className = '';
         break;
       case 'BOOKING_ERROR':
         this.root.className = 'overlay booking-error';
         break;
       case 'INIT_ERROR':
         this.root.className = 'overlay init-error';
+        this.body.className = '';
         break;
       default:
         this.root.className = 'overlay loading';
+        this.body.className = '';
     }
   }
 

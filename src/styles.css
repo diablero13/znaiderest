@@ -236,6 +236,7 @@ body {
   /* pointer-events: none;
   transition: 0.5s; */
 }
+
 #znaiderest-booking-form .form-box .form-field > input:focus ~ label,
 #znaiderest-booking-form .form-box .form-field > textarea:focus ~ label,
 #znaiderest-booking-form .form-box .form-field > select:focus ~ label,
