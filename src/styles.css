@@ -22,8 +22,7 @@ body {
 #znaiderest-widget {
   position: relative;
   display: block;
-  /* width: 480px; */
-  /* height: 248px; */
+  height: 100%;
   padding-bottom: 84px;
   box-sizing: border-box;
   color: var(--custom-text-color, #fff100);

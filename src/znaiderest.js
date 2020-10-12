@@ -1,13 +1,10 @@
 import { convertTime, convertDay, getLocaleText } from './utils';
 import { RECAPTCHA_KEY, API_BASE_URI, LOCALIZATION } from './constants';
-
 import styles from './styles.css';
 
-const IS_DEVELOPMENT = true;
-
 export default class Znaiderest {
-  constructor({ clientId, options, custom, origin, locale }) {
-    this.config = { clientId, options, origin, locale, custom };
+  constructor({ clientId, options, custom, origin, locale, development: isDevelopment }) {
+    this.config = { clientId, options, origin, locale, custom, isDevelopment };
     this.client = { clientId, origin };
 
     this.root = document.getElementById('znaiderest-widget');
@@ -76,7 +73,7 @@ export default class Znaiderest {
       fetch(`${API_BASE_URI}/places/${clientId}`, {
         method: 'GET',
         mode: 'cors',
-        headers: !IS_DEVELOPMENT
+        headers: !this.config.isDevelopment
           ? {
               'X-Recapthca-Token': token,
               'X-Client-Host': origin
@@ -152,7 +149,7 @@ export default class Znaiderest {
   onClientDataLoaded({ name, hours }) {
     this.client = { ...this.client, name, hours };
     this.fillBookingForm({ name, hours });
-    this.setFrameHeight();
+    // this.setFrameHeight();
   }
 
   onBookingDateChange({ target: { value } }) {
@@ -221,7 +218,7 @@ export default class Znaiderest {
         body: JSON.stringify(data),
         method: 'POST',
         mode: 'cors',
-        headers: !IS_DEVELOPMENT
+        headers: !this.config.isDevelopment
           ? {
               'X-Recapthca-Token': token,
               'X-Client-Host': origin

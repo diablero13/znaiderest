@@ -13,8 +13,8 @@
   },
   "license": "UNLICENSED",
   "scripts": {
-    "build": "npm run build:clean && parcel build src/test-page.html src/main.js src/component.js --no-content-hash --no-source-maps  -d ./build --public-url .",
-    "build:clean": "rm -rf ./dist ./build ./.cache && rm -rf release release-latest release-major",
+    "build": "npm run build:clean && parcel build src/test-page.html src/index.html src/main.js src/znaiderest-component.js --no-content-hash  -d ./build --public-url ./",
+    "build:clean": "rm -rf ./build ./.cache && rm -rf release release-latest release-major",
     "start": "parcel src/test-page.html",
     "watch": "parcel watch src/index.html",
     "lint": "eslint ./src",

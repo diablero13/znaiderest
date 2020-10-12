@@ -1,20 +1,18 @@
 import Znaiderest from './znaiderest';
 import { getUrlParams, parseData } from './utils';
 
-window.frameElement.style = 'display: block; border: none;';
-
 function onDomLoaded() {
-  const { clientId, custom, options, origin, locale } = {
-    ...getUrlParams(),
-    ...(window.frameElement ? window.frameElement.dataset : {})
+  const { clientId, custom, options, origin, locale, development } = {
+    ...getUrlParams()
   };
 
   const params = {
     custom: parseData(custom),
     options: parseData(options),
-    origin,
+    origin: origin || document.referrer,
     locale,
-    clientId
+    clientId,
+    development
   };
 
   const znaiderest = new Znaiderest(params);

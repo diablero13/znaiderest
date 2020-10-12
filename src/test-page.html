@@ -5,23 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Znaiderest widget test page</title>
-    <script src="./component.js" defer></script>
+    <script src="znaiderest-component.js" defer></script>
   </head>
 
   <body>
     <iframe
       width="700"
-      height="340"
-      src="index.html"
-      data-client-id="c3ff1898-493d-449c-9f93-05aad8949c19"
-      data-options='[
-        {"value": "столик на террасе", "title": "Летняя площадка"},
-        {"value": "Бизнес ланч"},
-        "игровая комната",
-        {"value": "парковка", "title": "Парковочное место"},
-        {"value": "напомнить о резерве за час", "title": "Бритая писька", "checked": true},
-        {"value": "столик на террасе", "title": "Потная сиська"}
-      ]'
+      height="450"
+      src="index.html?clientId=c3ff1898-493d-449c-9f93-05aad8949c19&options=Один;Два;Три;&development=true"
+      frameborder="0"
     ></iframe>
 
     <br />
@@ -34,8 +26,10 @@
         "background": "#333",
         "hideFooter": true
       }'
+      development="true"
       locale="uk"
       width="500"
+      height="368"
     >
     </znaiderest-widget>
 
@@ -45,6 +39,7 @@
       clientId="c3ff1898-493d-449c-9f93-05aad8949c19"
       options="Один;Два;Три;"
       width="380"
+      height="488"
     ></znaiderest-widget>
 
     <br />
