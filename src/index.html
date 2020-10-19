@@ -30,10 +30,11 @@
             <div class="form-field phone">
               <label for="booking_phone_input" data-text-key="FORM_PHONE_LABEL_TEXT"></label>
               <input
-                placeholder="+38 (0XX) XXX-XX-XX"
+                placeholder="38 (0XX) XXX-XX-XX"
                 id="booking_phone_input"
                 type="tel"
                 name="phone"
+                pattern="[380][0-9]{11}"
                 required
               />
             </div>

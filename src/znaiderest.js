@@ -176,9 +176,8 @@ export default class Znaiderest {
         first_name: name.value,
         phone_number: phone.value
       },
-      attributes: {
-        seats: number.value
-      },
+      seats: number.value,
+      type: 'normal',
       notes: notes.value.length ? `${notes.value};\n${optionsString}` : optionsString
     };
 
